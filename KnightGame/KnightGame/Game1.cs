@@ -14,21 +14,23 @@ namespace KnightGame
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         KeyboardState ks;
-        Texture2D purpleKnightSheet;
-        List<Rectangle> IdleFrames;
-        //public List<int> IdleOffSets;
-        //List<Rectangle> RunningFrames;
-        List<Rectangle> CurrentFrames;
-        TimeSpan idleTime;
+        MouseState ms;
+        //Texture2D purpleKnightSheet;
+        //List<Rectangle> IdleFrame;
+        //List<Rectangle> CurrentFrames;
+        //TimeSpan idleTime;
         //TimeSpan runningTime;
-        TimeSpan goalTime;
-        TimeSpan elapsedTime;
-        int currentFrame;
-        Vector2 PlayerPosition;
-        PlayerStates playerState;
+        //TimeSpan goalTime;
+        //TimeSpan elapsedTime;
+        //int currentFrame;
+        //Vector2 PlayerPosition;
+        //PlayerStates playerState;
         SpriteEffects effects;
-        Player player1;
+        //Player player1;
         SpriteFont font;
+        //Button testButton;
+        Screen testScreen;
+        Texture2D pixel;
         
 
         Dictionary<PlayerStates, List<Rectangle>> frames;
@@ -38,7 +40,7 @@ namespace KnightGame
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferWidth = 1600;
             graphics.PreferredBackBufferHeight = 900;
-            frames = new Dictionary<PlayerStates, List<Rectangle>>();
+            //frames = new Dictionary<PlayerStates, List<Rectangle>>();
         }
 
         /// <summary>
@@ -64,20 +66,23 @@ namespace KnightGame
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            purpleKnightSheet = Content.Load<Texture2D>("spritesheet");
+            //purpleKnightSheet = Content.Load<Texture2D>("spritesheet");
 
-            PlayerPosition = Vector2.Zero;// new Vector2(0, Window.ClientBounds.Height - 120);
-            font = Content.Load<SpriteFont>("font");
+            //PlayerPosition = Vector2.Zero;// new Vector2(0, Window.ClientBounds.Height - 120);
+            font = Content.Load<SpriteFont>("mainFont");
+            pixel = GameObject.CreateTexture(graphics.GraphicsDevice, 1, 1, Color.White);
 
-            currentFrame = 0;
-            elapsedTime = new TimeSpan();
-            idleTime = TimeSpan.FromMilliseconds(100);
+            //currentFrame = 0;
+            //elapsedTime = new TimeSpan();
+            //idleTime = TimeSpan.FromMilliseconds(100);
             //runningTime = TimeSpan.FromMilliseconds(75);
-            playerState = PlayerStates.idle;
-            goalTime = idleTime;
+            //playerState = PlayerStates.idle;
+            //goalTime = idleTime;
             effects = SpriteEffects.None;
 
-            player1 = new Player(purpleKnightSheet, new Vector2(PlayerPosition.X + 100, PlayerPosition.Y), Color.White, new Vector2(5, 10), GraphicsDevice.Viewport);
+            //testButton = new Button("This is a test button", font, Vector2.Zero, Color.Black, Vector2.One, 0f, effects, Color.White, .5f);
+
+            //player1 = new Player(purpleKnightSheet, new Vector2(PlayerPosition.X + 100, PlayerPosition.Y), Color.White, new Vector2(5, 10), GraphicsDevice.Viewport);
 
             // TODO: use this.Content to load your game content here
         }
@@ -99,12 +104,14 @@ namespace KnightGame
         protected override void Update(GameTime gameTime)
         {
             ks = Keyboard.GetState();
+            ms = Mouse.GetState();
 
             if (ks.IsKeyDown(Keys.Escape))
                 Exit();
 
-            player1.Update(gameTime, GraphicsDevice.Viewport, ks);
-            //ironMan.Update(gameTime, GraphicsDevice.Viewport);
+            //player1.Update(gameTime, GraphicsDevice.Viewport, ks);
+
+            //testButton.Update(ms);
 
             base.Update(gameTime);
         }
@@ -117,8 +124,8 @@ namespace KnightGame
         {
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
-            player1.Draw(spriteBatch);
-            //spriteBatch.DrawString(font, player1.playerState.ToString(), Vector2.Zero, Color.White);
+            //spriteBatch.DrawString(font, testButton.Clicked.ToString(), new Vector2(100, 100), Color.White);
+            //testButton.Draw(spriteBatch, pixel);
             spriteBatch.End();
             base.Draw(gameTime);
 

@@ -27,7 +27,7 @@ namespace KnightGame
             origin = Vector2.Zero;
         }
 
-        public void Draw(SpriteBatch sb)
+        public override void Draw(SpriteBatch sb)
         {
             sb.DrawString(font, text, position, color, rotation, origin, scale, effects, 0);
         }
