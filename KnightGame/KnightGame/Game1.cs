@@ -28,8 +28,26 @@ namespace KnightGame
         SpriteEffects effects;
         //Player player1;
         SpriteFont font;
-        //Button testButton;
-        Screen testScreen;
+
+        Button testButton1;
+        Text testText1;
+        Screen testScreen1;
+        List<GameObject> testParts1;
+
+        Button testButton2;
+        Text testText2;
+        Screen testScreen2;
+        List<GameObject> testParts2;
+
+        Screen menuScreen;
+        Text titleText;
+        Button enterSettings;
+        Button enterGame;
+        List<GameObject> menuParts;
+
+        ScreenManager screenManager;
+        ScreenStack screens;
+
         Texture2D pixel;
         
 
@@ -80,7 +98,26 @@ namespace KnightGame
             //goalTime = idleTime;
             effects = SpriteEffects.None;
 
-            //testButton = new Button("This is a test button", font, Vector2.Zero, Color.Black, Vector2.One, 0f, effects, Color.White, .5f);
+            testParts1 = new List<GameObject>();
+            testButton1 = new Button("This is a test button", font, Vector2.Zero, Color.Black, Vector2.One, 0f, effects, Color.White, .5f, pixel);
+            testText1 = new Text("This is screen 1", font, new Vector2(100), Color.Green, Vector2.One, 0f, effects);
+            testParts1.Add(testButton1);
+            testParts1.Add(testText1);
+            testScreen1 = new Screen(Vector2.Zero, Color.White, 1, testParts1, "1", testButton1);
+
+            testParts2 = new List<GameObject>();
+            testButton2 = new Button("This is a test button", font, Vector2.Zero, Color.Black, Vector2.One, 0f, effects, Color.White, .5f, pixel);
+            testText2 = new Text("This is screen 2", font, new Vector2(100), Color.Yellow, Vector2.One, 0f, effects);
+            testParts2.Add(testButton2);
+            testParts2.Add(testText2);
+            testScreen2 = new Screen(Vector2.Zero, Color.White, 1, testParts2, "2", testButton2);
+
+            //titleText = new 
+
+            screens = new ScreenStack(2);
+            screens.Push(testScreen2);
+            screens.Push(testScreen1);
+            screenManager = new ScreenManager(screens);
 
             //player1 = new Player(purpleKnightSheet, new Vector2(PlayerPosition.X + 100, PlayerPosition.Y), Color.White, new Vector2(5, 10), GraphicsDevice.Viewport);
 
@@ -112,6 +149,9 @@ namespace KnightGame
             //player1.Update(gameTime, GraphicsDevice.Viewport, ks);
 
             //testButton.Update(ms);
+            screenManager.Update();
+
+            
 
             base.Update(gameTime);
         }
@@ -125,7 +165,8 @@ namespace KnightGame
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin();
             //spriteBatch.DrawString(font, testButton.Clicked.ToString(), new Vector2(100, 100), Color.White);
-            //testButton.Draw(spriteBatch, pixel);
+            //testButton.Draw(spriteBatch);
+            screenManager.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
 

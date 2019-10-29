@@ -8,25 +8,30 @@ using System.Threading.Tasks;
 
 namespace KnightGame
 {
-    class Screen : GameObject
+    class Screen
     {
+        public List<GameObject> parts;
+        public bool partialScreen;
+        bool activeScreen;
+        
+        public Button exit;
+        string Name;
 
-        List<GameObject> parts;
-
-        public Screen(Vector2 position, Color color, Vector2 scale, float rotation, SpriteEffects effects)
-            :base(position, color, scale, rotation, effects)
+        public Screen(Vector2 position, Color color, float transparency, List<GameObject> parts, string Name, Button exit)
         {
-            parts = new List<GameObject>();
+            this.parts = parts;
+            this.Name = Name;
+            this.exit = exit;
         }
 
-        public override void Update()
+        public void Update()
         {
             for (int i = 0; i < parts.Count; i++)
             {
                 parts[i].Update();
             }
         }
-        public override void Draw(SpriteBatch sb)
+        public void Draw(SpriteBatch sb)
         {
             for (int i = 0; i < parts.Count; i++)
             {

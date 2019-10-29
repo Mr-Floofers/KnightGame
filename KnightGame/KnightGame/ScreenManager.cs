@@ -8,24 +8,31 @@ using System.Threading.Tasks;
 
 namespace KnightGame
 {
-    class ScreenManager : GameObject
+    class ScreenManager
     {
-        Stack<Screen> screens;
+        public ScreenStack screens;
         
-        public ScreenManager(Vector2 position, Color color, Vector2 scale, float rotation, SpriteEffects effects)
-            :base(position, color, scale, rotation, effects)
+        public ScreenManager(ScreenStack screens)
         {
-            
+            this.screens = screens;
         }
 
-        public override void Update()
+        public void Update()
         {
             screens.Peek().Update();
+            if(screens.Peek().exit.Clicked)
+            {
+                screens.Pop();
+            }
         }
 
-        public override void Draw(SpriteBatch sb)
+        public void Draw(SpriteBatch sb)
         {
             screens.Peek().Draw(sb);
+            //if(screens.Peek().partialScreen)
+            //{
+            //    screens.BackPeek().Draw(sb);
+            //}
         }
     }
 }

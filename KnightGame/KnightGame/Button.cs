@@ -17,6 +17,7 @@ namespace KnightGame
         MouseState preMs;
         float notOnColorFactor;
         Texture2D pixel;
+        MouseState ms;
 
         public bool Clicked = false;
 
@@ -38,7 +39,7 @@ namespace KnightGame
 
 
 
-        public void Update(MouseState ms)
+        public override void Update()
         {
             ms = Mouse.GetState();
             Clicked = false;
